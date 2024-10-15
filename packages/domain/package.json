@@ -27,6 +27,7 @@
     "@effect/platform": "latest",
     "@effect/schema": "latest",
     "@effect/sql": "latest",
+    "@effect/experimental": "latest",
     "effect": "latest"
   },
   "effect": {
