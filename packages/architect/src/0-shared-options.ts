@@ -1,7 +1,6 @@
-import * as Option from "effect/Option";
-import * as MobyApi from "the-moby-effect";
-
-import { DOCKER_IMAGE_TAG, SHARED_EMULATOR_DATA_VOLUME_NAME } from "../versions.js";
+import { Option } from "effect";
+import { Schemas as MobySchemas } from "the-moby-effect";
+import { DOCKER_IMAGE_TAG, SHARED_EMULATOR_DATA_VOLUME_NAME } from "./versions.js";
 
 /** The port bindings that all architect emulator containers must have. */
 export interface IArchitectPortBindings {
@@ -44,9 +43,9 @@ export const containerCreateOptions = ({
     containerName: string;
     environmentVariables: string[];
     command: Option.Option<string[]>;
-    networkMode: string | undefined;
+    networkMode?: "default" | "none" | "host" | "bridge" | "nat" | undefined;
     portBindings: Partial<IArchitectPortBindings>;
-}): MobyApi.Containers.ContainerCreateOptions => ({
+}): { name: string; spec: typeof MobySchemas.ContainerCreateRequest.Encoded } => ({
     name: containerName,
     spec: {
         Image: DOCKER_IMAGE_TAG,
@@ -56,17 +55,17 @@ export const containerCreateOptions = ({
             ? environmentVariables
             : ["DISPLAY=:0", ...environmentVariables],
         HostConfig: {
-            NetworkMode: networkMode || undefined,
-            DeviceRequests: [{ Count: -1, Driver: "nvidia", Capabilities: [["gpu"]] }],
+            NetworkMode: networkMode,
+            // DeviceRequests: [{ Count: -1, Driver: "nvidia", Capabilities: [["gpu"]], DeviceIDs: null, Options: null }],
             Devices: [{ CgroupPermissions: "mrw", PathInContainer: "/dev/kvm", PathOnHost: "/dev/kvm" }],
             PortBindings: portBindings,
             Binds: [
                 "/tmp/.X11-unix:/tmp/.X11-unix",
                 "/etc/timezone:/etc/timezone:ro",
                 "/etc/localtime:/etc/localtime:ro",
-                "/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/nvidia_icd.json",
-                "/usr/share/glvnd/egl_vendor.d/10_nvidia.json:/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
-                "/usr/share/vulkan/implicit_layer.d/nvidia_layers.json:/usr/share/vulkan/implicit_layer.d/nvidia_layers.json",
+                // "/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/nvidia_icd.json",
+                // "/usr/share/glvnd/egl_vendor.d/10_nvidia.json:/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+                // "/usr/share/vulkan/implicit_layer.d/nvidia_layers.json:/usr/share/vulkan/implicit_layer.d/nvidia_layers.json",
                 `${SHARED_EMULATOR_DATA_VOLUME_NAME}:/android/avd-home/Pixel2.avd/`,
             ],
         },
