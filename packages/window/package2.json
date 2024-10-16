@@ -1,11 +1,11 @@
 {
-    "name": "@template/cli",
+    "name": "@template/domain",
     "version": "0.0.0",
-    "description": "The CLI template",
+    "description": "The domain template",
     "repository": {
         "type": "git",
         "url": "<PLACEHOLDER>",
-        "directory": "packages/cli"
+        "directory": "packages/domain"
     },
     "license": "MIT",
     "type": "module",
@@ -20,19 +20,10 @@
         "test": "vitest"
     },
     "dependencies": {
-        "@effect/cli": "latest",
-        "@effect/platform": "^0.68.5",
-        "@effect/platform-node": "^0.63.5",
-        "@effect/printer": "^0.37.2",
-        "@effect/printer-ansi": "^0.37.2",
-        "@shocae/architect": "workspace:^",
-        "effect": "^3.9.2"
-    },
-    "devDependencies": {
-        "@effect/cli": "latest",
+        "@effect/experimental": "latest",
         "@effect/platform": "latest",
-        "@effect/platform-node": "latest",
-        "@shocae/architect": "workspace:^",
+        "@effect/schema": "latest",
+        "@effect/sql": "latest",
         "effect": "latest"
     },
     "publishConfig": {
