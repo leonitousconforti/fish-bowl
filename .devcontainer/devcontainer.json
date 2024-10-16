@@ -23,7 +23,8 @@
                 "eamodio.gitlens",
                 "mutantdino.resourcemonitor",
                 "GitHub.vscode-github-actions",
-                "yoavbls.pretty-ts-errors"
+                "yoavbls.pretty-ts-errors",
+                "zxh404.vscode-proto3"
             ],
             "settings": {
                 "cSpell.enabled": true,
