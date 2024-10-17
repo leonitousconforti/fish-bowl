@@ -73,10 +73,10 @@ const containerCreateOptions = ({
         Volumes: { "/android/avd-home/Pixel2.avd/": {} },
         Env: environmentVariables.some((environmentVariable) => environmentVariable.startsWith("DISPLAY="))
             ? environmentVariables
-            : ["DISPLAY=:0", ...environmentVariables],
+            : ["DISPLAY=:1", ...environmentVariables],
         HostConfig: {
             NetworkMode: networkMode,
-            // DeviceRequests: [{ Count: -1, Driver: "nvidia", Capabilities: [["gpu"]], DeviceIDs: null, Options: null }],
+            DeviceRequests: [{ Count: -1, Driver: "nvidia", Capabilities: [["gpu"]], DeviceIDs: null, Options: null }],
             Devices: [{ CgroupPermissions: "mrw", PathInContainer: "/dev/kvm", PathOnHost: "/dev/kvm" }],
             PortBindings: portBindings,
             Binds: [

@@ -1,4 +1,4 @@
-import { NodeRuntime } from "@effect/platform-node";
+import { NodeContext, NodeRuntime } from "@effect/platform-node";
 import { architect } from "@shocae/architect";
 import { Console, Effect, Function, Layer } from "effect";
 import { DockerEngine, Connection as MobyConnection } from "the-moby-effect";
@@ -14,4 +14,4 @@ const program = Effect.gen(function* () {
     yield* Console.log(result);
 });
 
-NodeRuntime.runMain(program.pipe(Effect.provide(localDocker)));
+program.pipe(Effect.provide(localDocker)).pipe(Effect.provide(NodeContext.layer)).pipe(NodeRuntime.runMain());
