@@ -140,7 +140,7 @@ const buildImage = (): Effect.Effect<
             context: Stream.provideLayer(contextStream, NodeContext.layer),
         });
 
-        yield* MobyConvey.followProgressInConsole(buildStream);
+        yield* MobyConvey.waitForProgressToComplete(buildStream);
     });
 
 /**
