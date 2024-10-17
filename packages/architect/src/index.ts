@@ -77,7 +77,7 @@ const containerCreateOptions = ({
         HostConfig: {
             NetworkMode: networkMode,
             DeviceRequests: [{ Count: -1, Driver: "nvidia", Capabilities: [["gpu"]], DeviceIDs: null, Options: null }],
-            Devices: [{ CgroupPermissions: "mrw", PathInContainer: "/dev/kvm", PathOnHost: "/dev/kvm" }],
+            // Devices: [{ CgroupPermissions: "mrw", PathInContainer: "/dev/kvm", PathOnHost: "/dev/kvm" }],
             PortBindings: portBindings,
             Binds: [
                 "/tmp/.X11-unix:/tmp/.X11-unix",
