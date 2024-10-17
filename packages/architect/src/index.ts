@@ -211,8 +211,8 @@ const populateSharedDataVolume = (): Effect.Effect<
         });
 
         if (exitCode.StatusCode !== 0) {
-            yield* containers.delete({ id: volumeHelperContainer.Id });
-            yield* volumes.delete({ name: volume.Name, force: true });
+            // yield* containers.delete({ id: volumeHelperContainer.Id });
+            // yield* volumes.delete({ name: volume.Name, force: true });
             return yield* Effect.fail(new Error("An error ocurred when populating the shared emulator data volume"));
         }
 
