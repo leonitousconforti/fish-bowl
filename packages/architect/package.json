@@ -2,47 +2,40 @@
     "name": "@shocae/architect",
     "version": "0.0.1",
     "description": "self hosted or cloud hosted android emulators",
-    "homepage": "https://git.ltgk.net/leoconforti/fish-bowl",
+    "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
         "type": "git",
-        "url": "https://git.ltgk.net/leoconforti/fish-bowl.git",
+        "url": "https://github.com/leoconforti/fish-bowl.git",
         "directory": "packages/architect"
     },
     "license": "MIT",
     "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
     "type": "module",
     "scripts": {
-        "build": "pnpm build-esm && pnpm build-annotate && pnpm build-cjs && build-utils pack-v2 && pnpm generate && cp -r emulator/ dist/dist/",
+        "build": "pnpm generate && pnpm build-esm && pnpm build-annotate && pnpm build-cjs && build-utils pack-v2 && cp -r emulator/ dist/dist/",
         "build-annotate": "babel build/esm --plugins annotate-pure-calls --out-dir build/esm --source-maps",
         "build-cjs": "babel build/esm --plugins @babel/transform-export-namespace-from --plugins @babel/transform-modules-commonjs --out-dir build/cjs --source-maps",
         "build-esm": "tsc -b tsconfig.build.json",
         "check": "tsc -b tsconfig.json",
         "codegen": "build-utils prepare-v2",
         "coverage": "vitest --coverage",
-        "generate": "buf generate",
-        "test": "vitest"
+        "generate": "buf generate"
     },
     "dependencies": {
         "@bufbuild/protobuf": "1.10.0",
-        "@connectrpc/connect": "1.6.1"
+        "the-moby-effect": "1.45.0-alpha.17"
     },
     "devDependencies": {
         "@bufbuild/buf": "1.45.0",
         "@bufbuild/protoc-gen-es": "1.10.0",
         "@connectrpc/protoc-gen-connect-es": "1.6.1",
-        "@effect/experimental": "0.29.6",
-        "@effect/platform": "0.68.6",
-        "@effect/platform-node": "0.63.6",
-        "@effect/schema": "0.75.5",
-        "effect": "3.9.2",
-        "the-moby-effect": "1.45.0-alpha.13"
+        "@effect/platform": "0.69.5",
+        "@effect/platform-node": "0.64.6",
+        "effect": "3.10.1"
     },
     "peerDependencies": {
-        "@effect/experimental": "0.29.6",
-        "@effect/platform": "0.68.6",
-        "@effect/platform-node": "0.63.6",
-        "@effect/schema": "0.75.5",
-        "effect": "3.9.2",
-        "the-moby-effect": "1.45.0-alpha.13"
+        "@effect/platform": "0.69.5",
+        "@effect/platform-node": "0.64.6",
+        "effect": "3.10.1"
     }
 }

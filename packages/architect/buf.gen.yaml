@@ -1,8 +1,8 @@
-version: v1
+version: v2
 plugins:
-    - plugin: es
-      opt: target=js+dts
-      out: ./dist
-    - plugin: connect-es
-      opt: target=js+dts
-      out: ./dist
+    - remote: buf.build/connectrpc/es:v1.6.1
+      opt: target=ts
+      out: ./src
+    - remote: buf.build/bufbuild/es:v1.10.0
+      opt: target=ts
+      out: ./src
