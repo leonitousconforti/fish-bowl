@@ -20,22 +20,21 @@
         "codegen": "build-utils prepare-v2",
         "generate": "buf generate"
     },
-    "dependencies": {
-        "@bufbuild/protobuf": "1.10.0",
-        "@connectrpc/connect": "1.6.1",
-        "the-moby-effect": "1.45.0-alpha.18"
-    },
     "devDependencies": {
         "@bufbuild/buf": "1.45.0",
+        "@bufbuild/protobuf": "1.10.0",
+        "@connectrpc/connect": "1.6.1",
         "@effect/platform": "0.69.6",
         "@effect/platform-node": "0.64.7",
-        "effect": "3.10.2"
+        "effect": "3.10.2",
+        "the-moby-effect": "1.45.0-alpha.18"
     },
     "peerDependencies": {
         "@bufbuild/protobuf": "1.10.0",
         "@connectrpc/connect": "1.6.1",
-        "@effect/platform": "0.69.5",
-        "@effect/platform-node": "0.64.6",
-        "effect": "3.10.1"
+        "@effect/platform": "0.69.6",
+        "@effect/platform-node": "0.64.7",
+        "effect": "3.10.2",
+        "the-moby-effect": "1.45.0-alpha.18"
     }
 }
