@@ -1,32 +1,29 @@
-import { Path, Error as PlatformError } from "@effect/platform";
-import { NodeContext } from "@effect/platform-node";
-import { Effect, Stream } from "effect";
+import {
+    DOCKERFILE_BLOB,
+    EMULATOR_ACCESS_BLOB,
+    ENTRYPOINT_BLOB,
+    ENVOY_BLOB,
+    NGINX_BLOB,
+    PULSE_AUDIO_BLOB,
+} from "@shocae/emulator/blobs";
+import { Effect, HashMap, Tuple } from "effect";
 import { DockerEngine, MobyConvey, MobyEndpoints } from "the-moby-effect";
 
 const DOCKER_IMAGE_TAG = "test:latest";
 
-export const buildImage = (): Effect.Effect<
-    void,
-    MobyEndpoints.ImagesError | PlatformError.PlatformError,
-    MobyEndpoints.Images | Path.Path
-> =>
+export const buildImage = (): Effect.Effect<void, MobyEndpoints.ImagesError, MobyEndpoints.Images> =>
     Effect.gen(function* () {
-        const path = yield* Path.Path;
-        const context = yield* path.fromFileUrl(new URL("../emulator", import.meta.url));
-        const contextStream = MobyConvey.packBuildContextIntoTarballStream(context, [
-            "default.pulse-audio",
-            "Dockerfile",
-            "emulator_access.json",
-            "entrypoint.sh",
-            "envoy.yaml",
-            "nginx.conf",
-        ]);
-
-        const buildStream = DockerEngine.build({
-            tag: DOCKER_IMAGE_TAG,
-            context: Stream.provideLayer(contextStream, NodeContext.layer),
-        });
-
+        const context = MobyConvey.packBuildContextIntoTarballStream(
+            HashMap.make(
+                Tuple.make("default.pulse-audio", PULSE_AUDIO_BLOB),
+                Tuple.make("Dockerfile", DOCKERFILE_BLOB),
+                Tuple.make("emulator_access.json", EMULATOR_ACCESS_BLOB),
+                Tuple.make("entrypoint.sh", ENTRYPOINT_BLOB),
+                Tuple.make("envoy.yaml", ENVOY_BLOB),
+                Tuple.make("nginx.conf", NGINX_BLOB)
+            )
+        );
+        const buildStream = DockerEngine.build({ tag: DOCKER_IMAGE_TAG, context });
         yield* MobyConvey.followProgressInConsole(buildStream);
     });
 

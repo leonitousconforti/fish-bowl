@@ -121,7 +121,17 @@ importers:
     publishDirectory: dist
 
   packages/control:
+    dependencies:
+      '@shocae/emulator':
+        specifier: workspace:^
+        version: link:../emulator/dist
+      the-moby-effect:
+        specifier: 1.45.0-alpha.18
+        version: 1.45.0-alpha.18(@effect/platform@0.69.6(effect@3.10.2))(effect@3.10.2)
     devDependencies:
+      '@effect/platform':
+        specifier: 0.69.6
+        version: 0.69.6(effect@3.10.2)
       effect:
         specifier: 3.10.2
         version: 3.10.2

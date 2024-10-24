@@ -20,7 +20,17 @@
         "check": "tsc -b tsconfig.json",
         "codegen": "build-utils prepare-v2"
     },
+    "dependencies": {
+        "@shocae/emulator": "workspace:^",
+        "the-moby-effect": "1.45.0-alpha.18"
+    },
     "devDependencies": {
+        "@effect/platform": "0.69.6",
+        "effect": "3.10.2",
+        "the-moby-effect": "1.45.0-alpha.18"
+    },
+    "peerDependencies": {
+        "@effect/platform": "0.69.6",
         "effect": "3.10.2"
     }
 }
