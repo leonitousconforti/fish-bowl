@@ -4,7 +4,7 @@
     "references": [
         // { "path": "apps/cli/tsconfig.build.json" },
         // { "path": "apps/web/tsconfig.build.json" },
-        { "path": "packages/architect/tsconfig.build.json" },
+        { "path": "packages/emulator/tsconfig.build.json" },
         { "path": "packages/window/tsconfig.build.json" }
     ]
 }

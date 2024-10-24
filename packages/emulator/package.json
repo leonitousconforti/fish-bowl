@@ -1,14 +1,14 @@
 {
-    "name": "@shocae/architect",
+    "name": "@shocae/emulator",
     "version": "0.0.1",
     "description": "self hosted or cloud hosted android emulators",
     "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
         "type": "git",
         "url": "https://github.com/leoconforti/fish-bowl.git",
-        "directory": "packages/architect"
+        "directory": "packages/emulator"
     },
-    "license": "MIT",
+    "license": "GPL-3.0-only",
     "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
     "type": "module",
     "scripts": {
@@ -36,5 +36,9 @@
         "@effect/platform-node": "0.64.7",
         "effect": "3.10.2",
         "the-moby-effect": "1.45.0-alpha.18"
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
     }
 }

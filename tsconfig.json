@@ -4,7 +4,7 @@
     "references": [
         // { "path": "apps/cli" },
         // { "path": "apps/web" },
-        { "path": "packages/architect" },
+        { "path": "packages/emulator" },
         { "path": "packages/window" }
     ]
 }
