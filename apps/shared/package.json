@@ -1,13 +1,13 @@
 {
-    "name": "@shocae/web",
+    "name": "@shocae/shared",
     "version": "0.0.1",
     "private": true,
-    "description": "shocae web",
+    "description": "shocae shared",
     "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
         "type": "git",
         "url": "https://github.com/leoconforti/fish-bowl.git",
-        "directory": "apps/web"
+        "directory": "apps/shared"
     },
     "license": "GPL-3.0-only",
     "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
@@ -22,5 +22,17 @@
     },
     "devDependencies": {
         "effect": "3.10.2"
+    },
+    "effect": {
+        "generateExports": {
+            "include": [
+                "**/*.ts"
+            ]
+        },
+        "generateIndex": {
+            "include": [
+                "**/*.ts"
+            ]
+        }
     }
 }

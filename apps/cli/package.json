@@ -1,13 +1,15 @@
 {
-    "name": "@template/cli",
-    "version": "0.0.0",
-    "description": "The CLI template",
+    "name": "@shocae/cli",
+    "version": "0.0.1",
+    "description": "shocae CLI",
+    "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
         "type": "git",
-        "url": "<PLACEHOLDER>",
-        "directory": "packages/cli"
+        "url": "https://github.com/leoconforti/fish-bowl.git",
+        "directory": "apps/cli"
     },
-    "license": "MIT",
+    "license": "GPL-3.0-only",
+    "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
     "type": "module",
     "scripts": {
         "build": "pnpm build-esm && pnpm build-annotate && pnpm build-cjs && build-utils pack-v2",
@@ -15,40 +17,13 @@
         "build-cjs": "babel build/esm --plugins @babel/transform-export-namespace-from --plugins @babel/transform-modules-commonjs --out-dir build/cjs --source-maps",
         "build-esm": "tsc -b tsconfig.build.json",
         "check": "tsc -b tsconfig.json",
-        "codegen": "build-utils prepare-v2",
-        "coverage": "vitest --coverage",
-        "test": "vitest"
-    },
-    "dependencies": {
-        "@effect/cli": "latest",
-        "@effect/platform": "^0.68.5",
-        "@effect/platform-node": "^0.63.5",
-        "@effect/printer": "^0.37.2",
-        "@effect/printer-ansi": "^0.37.2",
-        "@shocae/architect": "workspace:^",
-        "effect": "^3.9.2"
+        "codegen": "build-utils prepare-v2"
     },
     "devDependencies": {
-        "@effect/cli": "latest",
-        "@effect/platform": "latest",
-        "@effect/platform-node": "latest",
-        "@shocae/architect": "workspace:^",
-        "effect": "latest"
+        "effect": "3.10.2"
     },
     "publishConfig": {
         "access": "public",
         "directory": "dist"
-    },
-    "effect": {
-        "generateExports": {
-            "include": [
-                "**/*.ts"
-            ]
-        },
-        "generateIndex": {
-            "include": [
-                "**/*.ts"
-            ]
-        }
     }
 }

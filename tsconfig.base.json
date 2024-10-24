@@ -37,18 +37,10 @@
         "removeComments": false,
         "plugins": [{ "name": "@effect/language-service" }],
         "paths": {
-            "@shocae/cli": ["./apps/cli/src/index.js"],
-            "@shocae/cli/*": ["./apps/cli/src/*.js"],
-            "@shocae/cli/test/*": ["./apps/cli/test/*.js"],
-            "@shocae/dashboard": ["./apps/dashboard/src/index.js"],
-            "@shocae/dashboard/*": ["./apps/dashboard/src/*.js"],
-            "@shocae/dashboard/test/*": ["./apps/dashboard/test/*.js"],
-            "@shocae/architect": ["./packages/architect/src/index.js"],
-            "@shocae/architect/*": ["./packages/architect/src/*.js"],
-            "@shocae/architect/test/*": ["./packages/architect/test/*.js"],
+            "@shocae/emulator": ["./packages/emulator/src/index.js"],
+            "@shocae/emulator/*": ["./packages/emulator/src/*.js"],
             "@shocae/window": ["./packages/window/src/index.js"],
-            "@shocae/window/*": ["./packages/window/src/*.js"],
-            "@shocae/window/test/*": ["./packages/window/test/*.js"]
+            "@shocae/window/*": ["./packages/window/src/*.js"]
         }
     }
 }
