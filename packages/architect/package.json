@@ -23,7 +23,7 @@
     "dependencies": {
         "@bufbuild/protobuf": "1.10.0",
         "@connectrpc/connect": "1.6.1",
-        "the-moby-effect": "1.45.0-alpha.17"
+        "the-moby-effect": "1.45.0-alpha.18"
     },
     "devDependencies": {
         "@bufbuild/buf": "1.45.0",

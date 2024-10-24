@@ -6,12 +6,17 @@
         "connectrpc",
         "Demux",
         "Frida",
+        "localadmin",
+        "localtime",
+        "ltgk",
         "MITM",
         "Mitmproxy",
         "moby",
+        "proto",
         "protobuf",
         "protoc",
         "shocae",
-        "tsbuildinfo"
+        "tsbuildinfo",
+        "vulkan"
     ]
 }
