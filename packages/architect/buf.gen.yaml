@@ -1,4 +1,6 @@
 version: v2
+inputs:
+    - directory: ./protobuf
 plugins:
     - remote: buf.build/connectrpc/es:v1.6.1
       opt: target=ts

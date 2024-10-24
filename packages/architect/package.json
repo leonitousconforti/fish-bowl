@@ -18,22 +18,22 @@
         "build-esm": "tsc -b tsconfig.build.json",
         "check": "tsc -b tsconfig.json",
         "codegen": "build-utils prepare-v2",
-        "coverage": "vitest --coverage",
         "generate": "buf generate"
     },
     "dependencies": {
         "@bufbuild/protobuf": "1.10.0",
+        "@connectrpc/connect": "1.6.1",
         "the-moby-effect": "1.45.0-alpha.17"
     },
     "devDependencies": {
         "@bufbuild/buf": "1.45.0",
-        "@bufbuild/protoc-gen-es": "1.10.0",
-        "@connectrpc/protoc-gen-connect-es": "1.6.1",
-        "@effect/platform": "0.69.5",
-        "@effect/platform-node": "0.64.6",
-        "effect": "3.10.1"
+        "@effect/platform": "0.69.6",
+        "@effect/platform-node": "0.64.7",
+        "effect": "3.10.2"
     },
     "peerDependencies": {
+        "@bufbuild/protobuf": "1.10.0",
+        "@connectrpc/connect": "1.6.1",
         "@effect/platform": "0.69.5",
         "@effect/platform-node": "0.64.6",
         "effect": "3.10.1"
