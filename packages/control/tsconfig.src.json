@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig.base.json",
     "include": ["src"],
+    "references": [{ "path": "../emulator" }],
     "compilerOptions": {
         "types": ["node"],
         "outDir": "build/src",

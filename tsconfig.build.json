@@ -2,10 +2,9 @@
     "extends": "./tsconfig.base.json",
     "include": [],
     "references": [
-        { "path": "apps/cli/tsconfig.build.json" },
-        { "path": "apps/web/tsconfig.build.json" },
-        { "path": "apps/shared/tsconfig.build.json" },
-        { "path": "packages/window/tsconfig.build.json" },
+        { "path": "packages/cli/tsconfig.build.json" },
+        { "path": "packages/web/tsconfig.build.json" },
+        { "path": "packages/control/tsconfig.build.json" },
         { "path": "packages/emulator/tsconfig.build.json" }
     ]
 }

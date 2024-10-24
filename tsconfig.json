@@ -2,10 +2,9 @@
     "extends": "./tsconfig.base.json",
     "include": [],
     "references": [
-        { "path": "apps/cli" },
-        { "path": "apps/web" },
-        { "path": "apps/shared" },
-        { "path": "packages/window" },
+        { "path": "packages/cli" },
+        { "path": "packages/web" },
+        { "path": "packages/control" },
         { "path": "packages/emulator" }
     ]
 }

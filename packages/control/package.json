@@ -1,12 +1,13 @@
 {
-    "name": "@shocae/window",
+    "name": "@shocae/control",
     "version": "0.0.1",
-    "description": "window into a google goldfish android emulator",
+    "private": true,
+    "description": "shocae control",
     "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
         "type": "git",
         "url": "https://github.com/leoconforti/fish-bowl.git",
-        "directory": "packages/window"
+        "directory": "packages/control"
     },
     "license": "GPL-3.0-only",
     "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
@@ -19,8 +20,7 @@
         "check": "tsc -b tsconfig.json",
         "codegen": "build-utils prepare-v2"
     },
-    "publishConfig": {
-        "access": "public",
-        "directory": "dist"
+    "devDependencies": {
+        "effect": "3.10.2"
     }
 }

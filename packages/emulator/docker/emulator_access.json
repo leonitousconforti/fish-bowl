@@ -9,7 +9,7 @@
 //                no access token is presented. No security checks will
 //                be performed when these methods are invoked.
 //
-// - allowlist: A set of json objects that specifies for each token issuer,
+// - allowlist: A set of json objects that specificies for each token issuer,
 //              what is allowed and what requires an "aud" field.
 //
 //             - "iss": The token issuer.
@@ -24,7 +24,8 @@
     // This is a list of regular expressions. Access will be granted if the regular expression
     // matches the endpoint.
     "unprotected": [
-        ".*" // Matches every method, no authentication will be used **DANGER**
+        ".*"
+        // ".*" // Matches every method, no authentication will be used **DANGER**
         // "/android.emulation.control.SnapshotService.*" // Everyone can make snapshots.
     ],
     // List of methods that require a token, these are the methods
@@ -92,7 +93,7 @@
                 "/android.emulation.control.EmulatorController/setClipboard",
                 "/android.emulation.control.EmulatorController/getClipboard",
                 "/android.emulation.control.EmulatorController/streamClipboard",
-                // Can be used to "authenticate" with bio-data.
+                // Can be used to "authenticate" with biodata.
                 "/android.emulation.control.EmulatorController/sendFingerprint",
                 // Touch, key and mouse can be used to manipulate device state
                 "/android.emulation.control.EmulatorController/sendKey",

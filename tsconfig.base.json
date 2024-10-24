@@ -39,8 +39,8 @@
         "paths": {
             "@shocae/emulator": ["./packages/emulator/src/index.js"],
             "@shocae/emulator/*": ["./packages/emulator/src/*.js"],
-            "@shocae/window": ["./packages/window/src/index.js"],
-            "@shocae/window/*": ["./packages/window/src/*.js"]
+            "@shocae/control": ["./packages/control/src/index.js"],
+            "@shocae/control/*": ["./packages/control/src/*.js"]
         }
     }
 }
