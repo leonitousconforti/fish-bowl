@@ -22,15 +22,14 @@
     },
     "dependencies": {
         "@shocae/emulator": "workspace:^",
-        "the-moby-effect": "1.45.0-alpha.18"
+        "the-moby-effect": "1.45.0-alpha.20"
     },
     "devDependencies": {
-        "@effect/platform": "0.69.6",
-        "effect": "3.10.2",
-        "the-moby-effect": "1.45.0-alpha.18"
+        "@effect/platform": "0.70.0",
+        "effect": "3.11.0"
     },
     "peerDependencies": {
-        "@effect/platform": "0.69.6",
-        "effect": "3.10.2"
+        "@effect/platform": "0.70.0",
+        "effect": "3.11.0"
     }
 }

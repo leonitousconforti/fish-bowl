@@ -33,7 +33,10 @@
         "pulseaudio",
         "sdkmanager",
         "shocae",
+        "treeshake",
         "tsbuildinfo",
+        "tsup",
+        "undici",
         "vulkan",
         "xhost"
     ]

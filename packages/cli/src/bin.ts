@@ -1,18 +1,19 @@
 import { NodeRuntime } from "@effect/platform-node";
 import { architect, buildImage } from "@shocae/control";
 import { Effect, Function, Layer } from "effect";
-import { DockerEngine, MobyConnection } from "the-moby-effect";
+import { DockerEngine, MobyConnection, MobyConvey } from "the-moby-effect";
 
-const layerMain = Function.pipe(
+const DockerLive = Function.pipe(
     MobyConnection.connectionOptionsFromPlatformSystemSocketDefault,
     Effect.map(DockerEngine.layerNodeJS),
     Layer.unwrapEffect
 );
 
 Effect.gen(function* () {
-    yield* buildImage();
+    const buildStream = buildImage();
+    yield* MobyConvey.followProgressInConsole(buildStream);
     return yield* architect();
 })
     .pipe(Effect.map(Effect.log))
-    .pipe(Effect.provide(layerMain))
+    .pipe(Effect.provide(DockerLive))
     .pipe(NodeRuntime.runMain);

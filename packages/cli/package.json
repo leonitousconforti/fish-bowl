@@ -18,15 +18,15 @@
         "copy-package-json": "tsx scripts/copy-package-json.ts"
     },
     "devDependencies": {
-        "@effect/platform": "0.69.6",
-        "@effect/platform-node": "0.64.7",
+        "@effect/platform": "0.70.0",
+        "@effect/platform-node": "0.65.0",
         "@shocae/control": "workspace:^",
-        "@swc/core": "1.7.39",
-        "effect": "3.10.2",
+        "@swc/core": "1.9.3",
+        "effect": "3.11.0",
         "ssh2": "1.16.0",
-        "the-moby-effect": "1.45.0-alpha.18",
-        "tsup": "8.3.0",
-        "undici": "6.20.1"
+        "the-moby-effect": "1.45.0-alpha.20",
+        "tsup": "8.3.5",
+        "undici": "7.0.0"
     },
     "publishConfig": {
         "access": "public",

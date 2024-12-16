@@ -6,14 +6,15 @@ import {
     NGINX_BLOB,
     PULSE_AUDIO_BLOB,
 } from "@shocae/emulator/blobs";
-import { Effect, HashMap, Tuple } from "effect";
-import { DockerEngine, MobyConvey, MobyEndpoints } from "the-moby-effect";
+import { Effect, HashMap, Stream, Tuple } from "effect";
+import { DockerEngine, MobyConvey, MobyEndpoints, MobySchemas } from "the-moby-effect";
 
-const DOCKER_IMAGE_TAG = "test:latest";
+const DOCKER_IMAGE_TAG = "testbdhjasndksal:latest";
 
-export const buildImage = (): Effect.Effect<void, MobyEndpoints.ImagesError, MobyEndpoints.Images> =>
-    Effect.gen(function* () {
-        const context = MobyConvey.packBuildContextIntoTarballStream(
+export const buildImage = (): Stream.Stream<MobySchemas.JSONMessage, MobyEndpoints.ImagesError, MobyEndpoints.Images> =>
+    DockerEngine.build({
+        tag: DOCKER_IMAGE_TAG,
+        context: MobyConvey.packBuildContextIntoTarballStream(
             HashMap.make(
                 Tuple.make("default.pulse-audio", PULSE_AUDIO_BLOB),
                 Tuple.make("Dockerfile", DOCKERFILE_BLOB),
@@ -22,9 +23,7 @@ export const buildImage = (): Effect.Effect<void, MobyEndpoints.ImagesError, Mob
                 Tuple.make("envoy.yaml", ENVOY_BLOB),
                 Tuple.make("nginx.conf", NGINX_BLOB)
             )
-        );
-        const buildStream = DockerEngine.build({ tag: DOCKER_IMAGE_TAG, context });
-        yield* MobyConvey.followProgressInConsole(buildStream);
+        ),
     });
 
 export const architect = (): Effect.Effect<string, MobyEndpoints.ContainersError, MobyEndpoints.Containers> =>
