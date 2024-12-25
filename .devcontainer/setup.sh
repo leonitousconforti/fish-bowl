@@ -8,9 +8,6 @@ SHELL="$(which bash)" pnpm setup
 source /home/vscode/.bashrc
 pnpm config set store-dir $PNPM_HOME/store
 
-echo "Initializing submodules"
-git submodule update --init --recursive
-
 echo "📦 Installing repo dependencies..."
 corepack install
 corepack enable
