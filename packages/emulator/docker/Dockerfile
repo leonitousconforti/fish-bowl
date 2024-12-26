@@ -42,7 +42,10 @@ RUN chmod +x /usr/local/bin/envoy && \
     chmod +x /usr/local/bin/mitmweb && \
     chmod +x /usr/local/bin/mitmdump && \
     chmod +x /usr/local/bin/mitmproxy && \
-    chmod +x /entrypoint.sh
+    chmod +x /entrypoint.sh && \
+    sudo apt-get update && \
+    sudo apt-get install -y socat && \
+    rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5554 5555 8080 8081 8554 8555 27042
 CMD ["/entrypoint.sh"]

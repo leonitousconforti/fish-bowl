@@ -13,7 +13,7 @@ cp ~/.mitmproxy/mitmproxy-ca-cert.cer ~/.mitmproxy/$hashed_name.0
 
 # Start adb and emulator
 adb start-server
-emulator -avd device -gpu host -ports 5554,5555 -grpc 8554 -http-proxy "127.0.0.1:7999" -read-only -no-metrics &
+emulator -avd device -gpu host -ports 5554,5555 -grpc 8554 -read-only -no-metrics &
 adb wait-for-device
 until adb root; do echo "Failed to run adb root"; sleep 1s; done
 
