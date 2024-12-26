@@ -1,7 +1,6 @@
 {
     "name": "@shocae/control",
     "version": "0.0.1",
-    "private": true,
     "description": "shocae control",
     "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
@@ -31,5 +30,9 @@
     "peerDependencies": {
         "@effect/platform": "0.72.0",
         "effect": "3.12.0"
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
     }
 }
