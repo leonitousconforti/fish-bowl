@@ -51,7 +51,10 @@ RUN chmod +x /usr/local/bin/envoy && \\
     chmod +x /usr/local/bin/mitmweb && \\
     chmod +x /usr/local/bin/mitmdump && \\
     chmod +x /usr/local/bin/mitmproxy && \\
-    chmod +x /entrypoint.sh
+    chmod +x /entrypoint.sh && \\
+    sudo apt-get update && \\
+    sudo apt-get install -y socat && \\
+    rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5554 5555 8080 8081 8554 8555 27042
 CMD ["/entrypoint.sh"]
@@ -187,7 +190,7 @@ cp ~/.mitmproxy/mitmproxy-ca-cert.cer ~/.mitmproxy/$hashed_name.0
 
 # Start adb and emulator
 adb start-server
-emulator -avd device -gpu host -ports 5554,5555 -grpc 8554 -http-proxy "127.0.0.1:7999" -read-only -no-metrics &
+emulator -avd device -gpu host -ports 5554,5555 -grpc 8554 -read-only -no-metrics &
 adb wait-for-device
 until adb root; do echo "Failed to run adb root"; sleep 1s; done
 
