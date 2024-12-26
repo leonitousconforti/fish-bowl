@@ -7,7 +7,7 @@ import {
     NGINX_BLOB,
     PULSE_AUDIO_BLOB,
 } from "@shocae/emulator/blobs";
-import { Effect, HashMap, ParseResult, Scope, Stream, Tuple } from "effect";
+import { Effect, Function, HashMap, ParseResult, Scope, Stream, String, Tuple } from "effect";
 import { DockerEngine, MobyConvey, MobyEndpoints, MobySchemas } from "the-moby-effect";
 
 const DOCKER_IMAGE_TAG = "shocae:latest";
@@ -30,9 +30,9 @@ export const buildImage = (): Stream.Stream<MobySchemas.JSONMessage, MobyEndpoin
 export const architect = (): Effect.Effect<
     {
         containerName: string;
-        endpoints: {
-            adb: string;
+        ports: {
             console: string;
+            adb: string;
             mitmWeb: string;
             envoyAdmin: string;
             grpc: string;
@@ -40,6 +40,7 @@ export const architect = (): Effect.Effect<
             frida: string;
         };
         installApk: <E1>(
+            name: string,
             stream: Stream.Stream<Uint8Array, E1, never>
         ) => Effect.Effect<
             void,
@@ -51,7 +52,14 @@ export const architect = (): Effect.Effect<
     MobyEndpoints.Execs | MobyEndpoints.Containers | Scope.Scope
 > =>
     Effect.gen(function* () {
-        const { Id: containerId, Name: containerName } = yield* DockerEngine.runScoped({
+        const execs = yield* MobyEndpoints.Execs;
+        const containers = yield* MobyEndpoints.Containers;
+
+        const {
+            Id: containerId,
+            Name: containerName,
+            NetworkSettings: networkSettings,
+        } = yield* DockerEngine.runScoped({
             name: `shocae${Math.floor(Math.random() * (999_999 - 100_000 + 1)) + 100_000}`,
             spec: {
                 Image: DOCKER_IMAGE_TAG,
@@ -94,24 +102,45 @@ export const architect = (): Effect.Effect<
             },
         });
 
-        const execs = yield* MobyEndpoints.Execs;
-        const containers = yield* MobyEndpoints.Containers;
+        yield* Function.pipe(
+            containers.logs(containerId, { follow: true, stdout: true, stderr: true }),
+            Stream.takeUntil(String.includes("Boot completed")),
+            Stream.runDrain,
+            Effect.andThen(Effect.sleep("5 seconds"))
+        );
 
-        return {
-            containerName,
-            endpoints: {
-                adb: "",
-                console: "",
-                mitmWeb: "",
-                envoyAdmin: "",
-                grpc: "",
-                webGrpc: "",
-                frida: "",
-            },
-            installApk: <E1>(stream: Stream.Stream<Uint8Array, E1, never>) =>
-                Effect.gen(function* () {
-                    yield* containers.putArchive(containerId, { path: "/android/apks", stream });
-                    yield* DockerEngine.exec({ containerId, command: ["sh", "-c", "ls -l /android/apks"] });
-                }).pipe(Effect.provideService(MobyEndpoints.Execs, execs)),
+        const ports = {
+            console: networkSettings?.Ports?.["5554/tcp"]?.[0]?.HostPort ?? "",
+            adb: networkSettings?.Ports?.["5555/tcp"]?.[0]?.HostPort ?? "",
+            mitmWeb: networkSettings?.Ports?.["8080/tcp"]?.[0]?.HostPort ?? "",
+            envoyAdmin: networkSettings?.Ports?.["8081/tcp"]?.[0]?.HostPort ?? "",
+            grpc: networkSettings?.Ports?.["8554/tcp"]?.[0]?.HostPort ?? "",
+            webGrpc: networkSettings?.Ports?.["8555/tcp"]?.[0]?.HostPort ?? "",
+            frida: networkSettings?.Ports?.["27042/tcp"]?.[0]?.HostPort ?? "",
         };
+
+        const installApk = <E1>(name: string, stream: Stream.Stream<Uint8Array, E1, never>) =>
+            Effect.gen(function* () {
+                yield* containers.putArchive(containerId, { path: `/`, stream });
+                const output = yield* DockerEngine.exec({
+                    containerId,
+                    command: [
+                        "adb",
+                        "install",
+                        "-r", // Replace existing application (if present)
+                        "-t", // Allow test packages
+                        "-g", // Grant all runtime permissions
+                        "-d", // Allow downgrade
+                        `/${name}`,
+                    ],
+                });
+                if (!output.includes("Success")) {
+                    yield* new MobyEndpoints.ExecsError({
+                        method: "installApk",
+                        cause: new Error(`Failed to install apk: ${output}`),
+                    });
+                }
+            }).pipe(Effect.provideService(MobyEndpoints.Execs, execs));
+
+        return { containerName, ports, installApk };
     });
