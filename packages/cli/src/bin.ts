@@ -1,6 +1,6 @@
 import { NodeRuntime } from "@effect/platform-node";
 import { architect, buildImage } from "@shocae/control";
-import { Effect, Function, Layer } from "effect";
+import { Console, Effect, Function, Layer } from "effect";
 import { DockerEngine, MobyConnection, MobyConvey } from "the-moby-effect";
 
 const DockerLive = Function.pipe(
@@ -12,8 +12,10 @@ const DockerLive = Function.pipe(
 Effect.gen(function* () {
     const buildStream = buildImage();
     yield* MobyConvey.followProgressInConsole(buildStream);
-    return yield* architect();
+    const { containerName, endpoints } = yield* architect();
+    yield* Console.log(containerName);
+    yield* Console.log(endpoints);
 })
-    .pipe(Effect.map(Effect.log))
+    .pipe(Effect.scoped)
     .pipe(Effect.provide(DockerLive))
     .pipe(NodeRuntime.runMain);
