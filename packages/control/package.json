@@ -1,6 +1,6 @@
 {
     "name": "@shocae/control",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "shocae control",
     "homepage": "https://github.com/leoconforti/fish-bowl",
     "repository": {
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@shocae/emulator": "workspace:^",
-        "the-moby-effect": "1.45.0-alpha.21"
+        "the-moby-effect": "1.45.0-alpha.23"
     },
     "devDependencies": {
         "@effect/platform": "0.72.0",

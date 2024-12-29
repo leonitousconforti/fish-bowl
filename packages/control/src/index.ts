@@ -15,7 +15,7 @@ const DOCKER_IMAGE_TAG = "shocae:latest";
 export const buildImage = (): Stream.Stream<MobySchemas.JSONMessage, MobyEndpoints.ImagesError, MobyEndpoints.Images> =>
     DockerEngine.build({
         tag: DOCKER_IMAGE_TAG,
-        context: MobyConvey.packBuildContextIntoTarballStream(
+        context: MobyConvey.packIntoTarballStream(
             HashMap.make(
                 Tuple.make("default.pulse-audio", PULSE_AUDIO_BLOB),
                 Tuple.make("Dockerfile", DOCKERFILE_BLOB),
