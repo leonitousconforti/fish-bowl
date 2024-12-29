@@ -1,7 +1,7 @@
 FROM alpine:latest as dependency-preparer
 ENV MITM_PROXY_VERSION="11.0.0"
 ENV ENVOY_PROXY_VERSION="1.32.0"
-ENV FRIDA_SERVER_VERSION="16.5.6"
+ENV FRIDA_SERVER_VERSION="16.5.9"
 
 WORKDIR /tmp
 RUN apk add openssl wget xz tar && \
@@ -16,7 +16,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility,video,display,graphics"
 
 ENV MITM_PROXY_VERSION="11.0.0"
 ENV ENVOY_PROXY_VERSION="1.32.0"
-ENV FRIDA_SERVER_VERSION="16.5.6"
+ENV FRIDA_SERVER_VERSION="16.5.9"
 COPY --from=dependency-preparer "/tmp/mitmweb" "/usr/local/bin/mitmweb"
 COPY --from=dependency-preparer "/tmp/mitmdump" "/usr/local/bin/mitmdump"
 COPY --from=dependency-preparer "/tmp/mitmproxy" "/usr/local/bin/mitmproxy"
