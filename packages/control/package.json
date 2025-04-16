@@ -1,0 +1,44 @@
+{
+    "name": "@shocae/control",
+    "version": "0.0.2",
+    "description": "shocae control",
+    "homepage": "https://github.com/leoconforti/fish-bowl",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/leoconforti/fish-bowl.git",
+        "directory": "packages/control"
+    },
+    "license": "GPL-3.0-only",
+    "author": "Leo Conforti <leo@leoconforti.us> (https://leoconforti.us)",
+    "type": "module",
+    "scripts": {
+        "build": "pnpm build-esm && pnpm build-annotate && pnpm build-cjs && build-utils pack-v2",
+        "build-annotate": "babel build/esm --plugins annotate-pure-calls --out-dir build/esm --source-maps",
+        "build-cjs": "babel build/esm --plugins @babel/transform-export-namespace-from --plugins @babel/transform-modules-commonjs --out-dir build/cjs --source-maps",
+        "build-esm": "tsc -b tsconfig.build.json",
+        "check": "tsc -b tsconfig.json",
+        "codegen": "build-utils prepare-v2"
+    },
+    "dependencies": {
+        "@shocae/emulator": "workspace:^",
+        "frida": "16.6.1",
+        "frida-compile": "16.4.1",
+        "the-moby-effect": "1.45.0-alpha.24"
+    },
+    "devDependencies": {
+        "@effect/platform": "0.72.1",
+        "@effect/platform-node": "0.68.1",
+        "@effect/rpc": "0.47.1",
+        "@effect/rpc-http": "0.45.1",
+        "effect": "3.12.1"
+    },
+    "peerDependencies": {
+        "@effect/platform": "0.72.0",
+        "@effect/rpc": "0.47.1",
+        "effect": "3.12.0"
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
+    }
+}

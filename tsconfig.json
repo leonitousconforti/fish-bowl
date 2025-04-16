@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.base.json",
+    "include": [],
+    "references": [
+        { "path": "packages/effect-rpc-frida" },
+        { "path": "packages/cli" },
+        { "path": "packages/control" },
+        { "path": "packages/emulator" }
+    ]
+}

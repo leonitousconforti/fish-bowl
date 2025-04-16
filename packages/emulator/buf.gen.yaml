@@ -1,0 +1,7 @@
+version: v2
+inputs:
+    - directory: ./protobuf
+plugins:
+    - remote: buf.build/bufbuild/es:v2.2.2
+      opt: target=ts,ts_nocheck=false
+      out: ./src

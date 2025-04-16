@@ -1,0 +1,57 @@
+{
+    "private": true,
+    "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "tsc -b tsconfig.build.json && pnpm --recursive --parallel run build",
+        "changeset-publish": "pnpm build && TEST_DIST= pnpm vitest && changeset publish",
+        "changeset-version": "changeset version && node scripts/version.mjs",
+        "check": "tsc -b tsconfig.json",
+        "check-recursive": "pnpm --recursive exec tsc -b tsconfig.json",
+        "clean": "node scripts/clean.mjs",
+        "codegen": "pnpm --recursive --parallel run codegen",
+        "lint": "eslint \"**/*.{ts,tsx,mjs}\"",
+        "lint-fix": "pnpm lint --fix"
+    },
+    "devDependencies": {
+        "@babel/cli": "7.26.4",
+        "@babel/core": "7.26.0",
+        "@babel/plugin-transform-export-namespace-from": "7.25.9",
+        "@babel/plugin-transform-modules-commonjs": "7.26.3",
+        "@changesets/changelog-github": "0.5.0",
+        "@changesets/cli": "2.27.11",
+        "@effect/build-utils": "0.7.8",
+        "@effect/eslint-plugin": "0.2.0",
+        "@effect/language-service": "0.2.0",
+        "@eslint/compat": "1.2.4",
+        "@eslint/eslintrc": "3.2.0",
+        "@eslint/js": "9.17.0",
+        "@types/node": "22.10.5",
+        "@typescript-eslint/eslint-plugin": "8.19.0",
+        "@typescript-eslint/parser": "8.19.0",
+        "@typescript-eslint/utils": "8.19.0",
+        "babel-plugin-annotate-pure-calls": "0.4.0",
+        "effect": "3.12.1",
+        "eslint": "9.17.0",
+        "eslint-config-prettier": "9.1.0",
+        "eslint-import-resolver-typescript": "3.7.0",
+        "eslint-plugin-codegen": "0.29.0",
+        "eslint-plugin-prettier": "5.2.1",
+        "eslint-plugin-simple-import-sort": "12.1.1",
+        "eslint-plugin-sort-destructure-keys": "2.0.0",
+        "glob": "11.0.0",
+        "prettier": "3.4.2",
+        "prettier-plugin-jsdoc": "1.3.2",
+        "prettier-plugin-packagejson": "2.5.6",
+        "tsx": "4.19.2",
+        "typescript": "5.7.2"
+    },
+    "packageManager": "pnpm@9.10.0",
+    "pnpm": {
+        "patchedDependencies": {
+            "babel-plugin-annotate-pure-calls@0.4.0": "patches/babel-plugin-annotate-pure-calls@0.4.0.patch"
+        }
+    }
+}
